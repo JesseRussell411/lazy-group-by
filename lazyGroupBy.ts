@@ -137,11 +137,13 @@ function lazyGroupBy_helper<K, T>(
                                 // no, queue it for the group it does belong to and keep looking
                                 let itemQueue = itemQueues.get(itemKey);
                                 if (itemQueue === undefined) {
+                                    // if item queue not found
+                                    // add key to key queue because it has not been yielded or queued yet 
                                     keyQueue.unshift(itemKey);
                                     itemQueue = new LinkedList<T>();
-                                    itemQueue.unshift(item);
                                     itemQueues.set(itemKey, itemQueue);
                                 }
+                                itemQueue.unshift(item);
                             }
                         }
 
