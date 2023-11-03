@@ -44,6 +44,11 @@ export class LazilyGrouped<K, T> implements Iterable<[key: K, group: Iterable<T>
     }
 }
 
+
+function tuple<Items extends readonly any[]>(...items: Items): [...Items] {
+    return items as [...Items];
+}
+
 function lazyGroupBy_helper<K, T>(
     items: Iterable<T>,
     keySelector: (item: T) => K
