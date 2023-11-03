@@ -28,10 +28,12 @@ export class LazilyGrouped<K, T> implements Iterable<[key: K, group: Iterable<T>
             Symbol.iterator
         ]();
     }
-
-    public getGroup(key: K): Iterable<T> | undefined {
+    
+    public getGroup(key: K) {
         const group = this.groups.get(key);
-        if (group === undefined) {
+        if (group !== undefined) {
+            return group;
+        } else {
             for (const [groupKey, group] of this.iterateGroupGenerator()) {
                 if (groupKey === key) {
                     return group;
